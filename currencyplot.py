@@ -88,7 +88,7 @@ tab=[]
 output_file("/home/blaisekuo/currency/index.html",title="Forex Rate")
 
 amount=1
-amount2=100
+amount2=1000
 
     #xptoi=sg_dict[i]
     #yptoi=sin(xptoi*2*pi)
