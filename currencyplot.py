@@ -81,9 +81,11 @@ tsphp['TIME_PERIOD'] = pd.to_datetime(tsphp['TIME_PERIOD'])
 curdatadatephp=np.array(tsphp['TIME_PERIOD'].values)
 curdataphp=np.array(tsphp['OBS_VALUE'].values)
 
+
+
 tab=[]
 
-output_file("index.html",title="Forex Rate")
+output_file("/home/blaisekuo/currency/index.html",title="Forex Rate")
 
 amount=1
 amount2=100
@@ -116,7 +118,7 @@ source = ColumnDataSource(data={
 #USD-PHP
 hover = HoverTool(tooltips=[
     #("index", "$index"),
-    ('date','@x{%F}'),
+    ('date','@x{%Y-%m-%d}'),
     ('PHP', '₱@{p2u}{,3.2f}'),
 #    ('usd to php','@{curdatausd/curdataphp}'),
 #    ('php to usd','@p2u'),
@@ -126,11 +128,12 @@ hover = HoverTool(tooltips=[
 ],
                  
                  formatters={
-        'x'      : 'datetime', # use 'datetime' formatter for 'date' field
+        '@x'      : 'datetime', # use 'datetime' formatter for 'date' field
     })
 
 
 t=pd.to_datetime(str(curdatadateusd[-1]))
+#t=curdatadateusd[-1]
 convertrate=curdataphp[-1]/curdatausd[-1]
 
 p=(figure(title=str(amount) + " USD converted to PHP, Euro Central Bank rate (" +
@@ -170,7 +173,7 @@ hover = HoverTool(tooltips=[
     #('desc', '@desc'),
 ],
                  formatters={
-        'x'      : 'datetime', # use 'datetime' formatter for 'date' field
+        '@x'      : 'datetime', # use 'datetime' formatter for 'date' field
     })
 
 p=(figure(title=str(amount2) + " PHP converted to USD, Euro Central Bank rate (" +
@@ -210,7 +213,7 @@ hover = HoverTool(tooltips=[
 ],
                  
                  formatters={
-        'x'      : 'datetime', # use 'datetime' formatter for 'date' field
+        '@x'      : 'datetime', # use 'datetime' formatter for 'date' field
     })
 
 
@@ -254,14 +257,14 @@ hover = HoverTool(tooltips=[
     #('desc', '@desc'),
 ],
                  formatters={
-        'x'      : 'datetime', # use 'datetime' formatter for 'date' field
+        '@x'      : 'datetime', # use 'datetime' formatter for 'date' field
     })
 
 p=(figure(title=str(amount2) + " PHP converted to AUD, Euro Central Bank rate (" +
           t.strftime('%Y-%m-%d') + ": $1 AUD = " + '₱{:.2f}'.format(convertrate) + 
           " PHP)", tools="pan,wheel_zoom,box_zoom,reset", x_axis_label='date', y_axis_label='conversion'))
 
-p.line(x='x',y='a2p', color = 'yellow', line_width=2, source=source)
+p.line(x='x',y='a2p', color = 'orange', line_width=2, source=source)
 p.add_tools(hover)
 #p.line(curdatadateusd,amount*curdatausd/curdataphp, legend="USD", color = 'blue', line_width=2)
 
