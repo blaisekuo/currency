@@ -3,7 +3,7 @@ import pandas as pd # 0.23.0
 import io
 from datetime import datetime
 
-from bokeh.plotting import figure, output_file, output_notebook, show
+from bokeh.plotting import figure, output_file, output_notebook, show, save
 from bokeh.models.widgets import CheckboxGroup
 from bokeh.layouts import row, widgetbox
 from bokeh.models.widgets import Panel, Tabs
@@ -83,7 +83,7 @@ curdataphp=np.array(tsphp['OBS_VALUE'].values)
 
 tab=[]
 
-output_file("index.html")
+output_file("index.html",title="Forex Rate")
 
 amount=1
 amount2=100
@@ -285,7 +285,9 @@ tab.append(Panel(child=row(p), title='PHP-AUD'))
 
 tabs = Tabs(tabs=tab)
 
-show(tabs)
+
+#show(tabs)
+save(tabs)
 
 #legend = Legend(items=legend_it)
 #legend.click_policy="mute"
