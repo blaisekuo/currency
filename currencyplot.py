@@ -177,8 +177,8 @@ hover = HoverTool(tooltips=[
     })
 
 p=(figure(title=str(amount2) + " PHP converted to USD, Euro Central Bank rate (" +
-          t.strftime('%Y-%m-%d') + ": $1 USD = " + '₱{:.2f}'.format(convertrate) + 
-          " PHP)", tools="pan,wheel_zoom,box_zoom,reset", x_axis_label='date', y_axis_label='conversion'))
+          t.strftime('%Y-%m-%d') + ": " + '₱{:.2f}'.format(convertrate) + 
+          " PHP = $1 USD)", tools="pan,wheel_zoom,box_zoom,reset", x_axis_label='date', y_axis_label='conversion'))
 
 p.line(x='x',y='u2p', color = 'red', line_width=2, source=source)
 p.add_tools(hover)
@@ -261,8 +261,8 @@ hover = HoverTool(tooltips=[
     })
 
 p=(figure(title=str(amount2) + " PHP converted to AUD, Euro Central Bank rate (" +
-          t.strftime('%Y-%m-%d') + ": $1 AUD = " + '₱{:.2f}'.format(convertrate) + 
-          " PHP)", tools="pan,wheel_zoom,box_zoom,reset", x_axis_label='date', y_axis_label='conversion'))
+          t.strftime('%Y-%m-%d') + ": " + '₱{:.2f}'.format(convertrate) + 
+          " PHP = $1 AUD)", tools="pan,wheel_zoom,box_zoom,reset", x_axis_label='date', y_axis_label='conversion'))
 
 p.line(x='x',y='a2p', color = 'orange', line_width=2, source=source)
 p.add_tools(hover)
