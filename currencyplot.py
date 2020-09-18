@@ -177,7 +177,7 @@ p=(figure(title=str(amount2) + " PHP converted to USD, Euro Central Bank rate ("
           t.strftime('%Y-%m-%d') + ": $1 USD = " + '₱{:.2f}'.format(convertrate) + 
           " PHP)", tools="pan,wheel_zoom,box_zoom,reset", x_axis_label='date', y_axis_label='conversion'))
 
-p.line(x='x',y='u2p', color = 'blue', line_width=2, source=source)
+p.line(x='x',y='u2p', color = 'red', line_width=2, source=source)
 p.add_tools(hover)
 #p.line(curdatadateusd,amount*curdatausd/curdataphp, legend="USD", color = 'blue', line_width=2)
 
@@ -293,4 +293,4 @@ show(tabs)
 #p.add_layout(legend, 'right')
 
 #show(p)
-output_notebook()
+#output_notebook()
