@@ -103,6 +103,8 @@ source = ColumnDataSource(data={
 #    'ru2p'    : curdatausd/curdataphp,
     'a2p'    : amount2*curdataaud/curdataphp,
 #    'ra2p'    : curdataaud/curdataphp
+    'a2u'    : amount*curdataaud/curdatausd,
+    'u2a'    : amount*curdatausd/curdataaud,
 })
 
 #source = ColumnDataSource(dict(phase=xptoi.flatten()))
@@ -285,6 +287,91 @@ p.xaxis.major_label_orientation = pi/4
 tab.append(Panel(child=row(p), title='PHP-AUD'))
 
 
+#AUD-USD
+hover = HoverTool(tooltips=[
+    #("index", "$index"),
+    ('date','@x{%F}'),
+    ('USD', '₱@{u2a}{,3.2f}'),
+#    ('usd to php','@{curdatausd/curdataphp}'),
+#    ('php to usd','@p2u'),
+#    ('aud to php','@a2p{,3.4f}'),
+#    ('php to aud','@p2a{,3.4f}')
+    #('desc', '@desc'),
+],
+                 
+                 formatters={
+        '@x'      : 'datetime', # use 'datetime' formatter for 'date' field
+    })
+
+
+t=pd.to_datetime(str(curdatadateaud[-1]))
+convertrate=curdatausd[-1]/curdataaud[-1]
+
+p=(figure(title=str(amount) + " AUD converted to USD, Euro Central Bank rate (" +
+          t.strftime('%Y-%m-%d') + ": $1 AUD = " + '${:.2f}'.format(convertrate) + 
+          " USD)", tools="pan,wheel_zoom,box_zoom,reset", x_axis_label='date', y_axis_label='conversion'))
+p.add_tools(hover)
+p.line(x='x',y='u2a', color = 'navy', line_width=2,source=source)
+#p.line(curdatadateusd,amount*curdatausd/curdataphp, legend="USD", color = 'blue', line_width=2)
+
+p.xaxis.formatter=DatetimeTickFormatter(
+        hours=["%d %B %Y"],
+        days=["%d %B %Y"],
+        months=["%d %B %Y"],
+        years=["%d %B %Y"],
+    )
+p.xaxis.major_label_orientation = pi/4
+
+
+#p.line(curdatadatephp,curdataphp, legend="PHP", color = 'green', line_width=2)
+#p.circle(xptoi, yptoi, name=the_key_st, legend=the_key_st, fill_color="red", line_color="red", size=6)
+
+
+#tab.append(Panel(child=row(p,data_table), title=the_key_st))
+tab.append(Panel(child=row(p), title='AUD-USD'))
+
+
+#USD-AUD
+hover = HoverTool(tooltips=[
+    #("index", "$index"),
+    ('date','@x{%F}'),
+    ('AUD', '$@{a2u}{,3.2f}'),
+#    ('rate', '@{ru2p}{.15f}'),
+#    ('usd to php','@{curdatausd/curdataphp}'),
+#    ('php to usd','@p2u'),
+#    ('aud to php','@a2p{,3.4f}'),
+#    ('php to aud','@p2a{,3.4f}')
+    #('desc', '@desc'),
+],
+                 formatters={
+        '@x'      : 'datetime', # use 'datetime' formatter for 'date' field
+    })
+
+convertrate=curdataaud[-1]/curdatausd[-1]
+
+p=(figure(title=str(amount) + " USD converted to AUD, Euro Central Bank rate (" +
+          t.strftime('%Y-%m-%d') + ": $1 USD = " + '${:.2f}'.format(convertrate) + 
+          " AUD)", tools="pan,wheel_zoom,box_zoom,reset", x_axis_label='date', y_axis_label='conversion'))
+
+p.line(x='x',y='a2u', color = 'maroon', line_width=2, source=source)
+p.add_tools(hover)
+#p.line(curdatadateusd,amount*curdatausd/curdataphp, legend="USD", color = 'blue', line_width=2)
+
+p.xaxis.formatter=DatetimeTickFormatter(
+        hours=["%d %B %Y"],
+        days=["%d %B %Y"],
+        months=["%d %B %Y"],
+        years=["%d %B %Y"],
+    )
+p.xaxis.major_label_orientation = pi/4
+
+
+#p.line(curdatadatephp,curdataphp, legend="PHP", color = 'green', line_width=2)
+#p.circle(xptoi, yptoi, name=the_key_st, legend=the_key_st, fill_color="red", line_color="red", size=6)
+
+
+#tab.append(Panel(child=row(p,data_table), title=the_key_st))
+tab.append(Panel(child=row(p), title='USD-AUD'))
 
 tabs = Tabs(tabs=tab)
 
