@@ -291,7 +291,7 @@ tab.append(Panel(child=row(p), title='PHP-AUD'))
 hover = HoverTool(tooltips=[
     #("index", "$index"),
     ('date','@x{%F}'),
-    ('USD', '₱@{u2a}{,3.2f}'),
+    ('USD', '$@{u2a}{,3.2f}'),
 #    ('usd to php','@{curdatausd/curdataphp}'),
 #    ('php to usd','@p2u'),
 #    ('aud to php','@a2p{,3.4f}'),
